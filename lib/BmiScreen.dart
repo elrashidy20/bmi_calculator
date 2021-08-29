@@ -9,6 +9,10 @@ class BmiScreen extends StatefulWidget {
 }
 
 class _BmiScreenState extends State<BmiScreen> {
+  bool isMale=true;
+  double height=120;
+  int weight=40;
+  int age=20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,53 +27,67 @@ class _BmiScreenState extends State<BmiScreen> {
               child: Row(
                children: [
                  Expanded(
-                   child: Container(
-                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                       Image(
-                           image:AssetImage('images/male.png'),
-                         height: 90,
-                           width: 90,
-                       ),
-                         SizedBox(
-                           height: 15,
+                   child: GestureDetector(
+                     onTap: (){
+                       setState(() {
+                         isMale=true;
+                       });
+                     },
+                     child: Container(
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                         Image(
+                             image:AssetImage('assets/images/male.png'),
+                           height: 90,
+                             width: 90,
                          ),
-                         Text('MALE',style: TextStyle(
-                           fontSize: 25,
-                           fontWeight: FontWeight.bold,
-                         ),),
-                       ],
-                     ),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(10),
-                       color: Colors.grey[300],
+                           SizedBox(
+                             height: 15,
+                           ),
+                           Text('MALE',style: TextStyle(
+                             fontSize: 25,
+                             fontWeight: FontWeight.bold,
+                           ),),
+                         ],
+                       ),
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(10),
+                         color: isMale ? Colors.blue : Colors.grey[400],
+                       ),
                      ),
                    ),
                  ),
                  SizedBox(width: 20,),
                  Expanded(
-                   child: Container(
-                     child: Column(
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Image(
-                           image:AssetImage('images/female.png'),
-                           height: 90,
-                           width: 90,
-                         ),
-                         SizedBox(
-                           height: 15,
-                         ),
-                         Text('FEMALE',style: TextStyle(
-                           fontSize: 25,
-                           fontWeight: FontWeight.bold,
-                         ),),
-                       ],
-                     ),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(10),
-                       color: Colors.grey[300],
+                   child: GestureDetector(
+                     onTap: (){
+                       setState(() {
+                         isMale=false;
+                       });
+                     },
+                     child: Container(
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           Image(
+                             image:AssetImage('assets/images/female.png'),
+                             height: 90,
+                             width: 90,
+                           ),
+                           SizedBox(
+                             height: 15,
+                           ),
+                           Text('FEMALE',style: TextStyle(
+                             fontSize: 25,
+                             fontWeight: FontWeight.bold,
+                           ),),
+                         ],
+                       ),
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(10),
+                         color: isMale ? Colors.grey[400] :Colors.blue,
+                       ),
                      ),
                    ),
                  ),
@@ -93,7 +111,7 @@ class _BmiScreenState extends State<BmiScreen> {
                       textBaseline: TextBaseline.alphabetic,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('180',style: TextStyle(
+                        Text('${height.round()}',style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w900,
                         ),),
@@ -104,11 +122,14 @@ class _BmiScreenState extends State<BmiScreen> {
                         ),),
                       ],
                     ),
-                    Slider(value:
-                      120,
+                    Slider(
+                      value: height,
                       max:220,
                       min: 88,
                       onChanged:(value){
+                        setState(() {
+                          height=value;
+                        });
                       print(value.round());
                       } ,)
                   ],
@@ -130,11 +151,11 @@ class _BmiScreenState extends State<BmiScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('AGE',style: TextStyle(
+                          Text('WEIGHT',style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25
                           ),),
-                          Text('180',style: TextStyle(
+                          Text('$weight',style: TextStyle(
                             fontWeight: FontWeight.w900,
                             fontSize: 40
                           ),),
@@ -142,13 +163,21 @@ class _BmiScreenState extends State<BmiScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
                                 mini:true,
                                 child:Icon(
                                   Icons.remove,
                                 ) ,),
                               FloatingActionButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
                                 mini:true,
                                 child:Icon(
                                   Icons.add,
@@ -173,7 +202,7 @@ class _BmiScreenState extends State<BmiScreen> {
                               fontWeight: FontWeight.bold,
                               fontSize: 25
                           ),),
-                          Text('180',style: TextStyle(
+                          Text('$age',style: TextStyle(
                               fontWeight: FontWeight.w900,
                               fontSize: 40
                           ),),
@@ -181,13 +210,21 @@ class _BmiScreenState extends State<BmiScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
                                 mini:true,
                                 child:Icon(
                                   Icons.remove,
                                 ) ,),
                               FloatingActionButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
                                 mini:true,
                                 child:Icon(
                                   Icons.add,
